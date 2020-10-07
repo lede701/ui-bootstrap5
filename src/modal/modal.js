@@ -667,7 +667,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
       options: {
         animation: true,
         backdrop: true, //can also be false or 'static'
-        keyboard: true
+        keyboard: true,
+        scrollable: false
       },
       $get: ['$rootScope', '$q', '$document', '$templateRequest', '$controller', '$uibResolve', '$uibModalStack',
         function ($rootScope, $q, $document, $templateRequest, $controller, $uibResolve, $modalStack) {
