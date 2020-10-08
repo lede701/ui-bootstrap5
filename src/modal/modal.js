@@ -102,7 +102,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
       link: function(scope, element, attrs) {
         element.addClass(attrs.windowTopClass || '');
         scope.size = attrs.size;
-        scope.scrollable = attrs.scrollable;
+        scope.scrollable = attrs.scrollable === 'true';
 
         scope.close = function(evt) {
           var modal = $modalStack.getTop();
@@ -426,7 +426,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           openedClass: modal.openedClass,
           windowTopClass: modal.windowTopClass,
           animation: modal.animation,
-          appendTo: modal.appendTo
+          appendTo: modal.appendTo,
+          scrollable: modal.scrollable
         });
 
         openedClasses.put(modalBodyClass, modalInstance);
