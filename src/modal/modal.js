@@ -102,6 +102,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
       link: function(scope, element, attrs) {
         element.addClass(attrs.windowTopClass || '');
         scope.size = attrs.size;
+        scope.scrollable = attrs.scrollable === 'true';
 
         scope.close = function(evt) {
           var modal = $modalStack.getTop();
@@ -425,7 +426,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           openedClass: modal.openedClass,
           windowTopClass: modal.windowTopClass,
           animation: modal.animation,
-          appendTo: modal.appendTo
+          appendTo: modal.appendTo,
+          scrollable: modal.scrollable
         });
 
         openedClasses.put(modalBodyClass, modalInstance);
@@ -484,6 +486,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           'aria-labelledby': modal.ariaLabelledBy,
           'aria-describedby': modal.ariaDescribedBy,
           'size': modal.size,
+          'scrollable': modal.scrollable,
           'index': topModalIndex,
           'animate': 'animate',
           'ng-style': '{\'z-index\': 1050 + $$topModalIndex*10, display: \'block\'}',
@@ -665,7 +668,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
       options: {
         animation: true,
         backdrop: true, //can also be false or 'static'
-        keyboard: true
+        keyboard: true,
+        scrollable: false
       },
       $get: ['$rootScope', '$q', '$document', '$templateRequest', '$controller', '$uibResolve', '$uibModalStack',
         function ($rootScope, $q, $document, $templateRequest, $controller, $uibResolve, $modalStack) {
@@ -763,6 +767,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
                   ariaLabelledBy: modalOptions.ariaLabelledBy,
                   ariaDescribedBy: modalOptions.ariaDescribedBy,
                   size: modalOptions.size,
+                  scrollable: modalOptions.scrollable,
                   openedClass: modalOptions.openedClass,
                   appendTo: modalOptions.appendTo
                 };

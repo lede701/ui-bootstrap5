@@ -1389,6 +1389,29 @@ describe('$uibModal', function() {
       });
     });
 
+    describe('scrollable', function() {
+      it('should default to false', function() {
+        open({
+          template: '<div>Non scollable modal dialog</div>'
+        });
+        
+        expect($document.find('div.modal-dialog')).not.toHaveClass('modal-dialog-scrollable');
+      });
+      it('should add the scrollable class if scrollable set to true', function() {
+        open({
+          template: '<div>Large modal dialog</div>',
+          scrollable: true
+        });
+
+        expect($document.find('div.modal-dialog')).toHaveClass('modal-dialog-scrollable');
+      });
+      it('should allow overriding default options in a provider', function() {
+        $uibModalProvider.options.scrollable = true;
+        open({template: '<div>Content</div>'});
+        expect($document.find('div.modal-dialog')).toHaveClass('modal-dialog-scrollable');
+      });
+    });
+
     describe('animation', function() {
       it('should have animation fade classes by default', function() {
         open({
