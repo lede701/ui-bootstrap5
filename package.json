@@ -24,7 +24,8 @@
   "scripts": {
     "serve": "static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
     "demo": "grunt html2js after-test && static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
-    "test": "grunt"
+    "test": "grunt",
+	"release": "grunt release"
   },
   "repository": {
     "type": "git",
