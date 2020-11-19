@@ -1,3 +1,8 @@
+<a name="3.0.7"></a>
+## [3.0.7](https://github.com/morgul/ui-bootstrap4/compare/v3.0.5...v3.0.7) (2020-11-19)
+
+
+
 <a name="3.0.6"></a>
 ## [3.0.6](https://github.com/morgul/ui-bootstrap4/compare/v3.0.5...v3.0.6) (2018-12-04)
 

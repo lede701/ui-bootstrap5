@@ -1,7 +1,7 @@
 {
   "author": "https://github.com/morgul/ui-bootstrap4/graphs/contributors",
   "name": "ui-bootstrap4",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "Native AngularJS (Angular) directives for Bootstrap",
   "homepage": "http://morgul.github.io/ui-bootstrap4/",
   "keywords": [
@@ -25,7 +25,7 @@
     "serve": "static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
     "demo": "grunt html2js after-test && static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
     "test": "grunt",
-	"release": "grunt release --"
+    "grunt": "grunt --"
   },
   "repository": {
     "type": "git",
