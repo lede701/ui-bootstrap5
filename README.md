@@ -1,8 +1,8 @@
-# UI Bootstrap 4
+# UI Bootstrap 5
 
 ## Fork
 
-This is a fork of the original [ui-bootstrap4][] project. It has been modified to work with Bootstrap 5. The reason this repository exists is because some applications are choosing (or are forced to chose) to stay with Angular 1, but would like to move to Bootstrap 5.
+This is a fork of the original [ui-bootstrap5][] project. It has been modified to work with Bootstrap 5. The reason this repository exists is because some applications are choosing (or are forced to chose) to stay with Angular 1, but would like to move to Bootstrap 5.
 
 ## 🚨 Help Wanted 🚨
 
