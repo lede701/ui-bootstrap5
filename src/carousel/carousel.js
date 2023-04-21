@@ -10,6 +10,18 @@ angular.module('ui.bootstrap.carousel', [])
   var destroyed = false;
   $element.addClass('carousel');
 
+  self.MakeId = function(length) {
+    var result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    var counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+  };
+
   self.addSlide = function(slide, element) {
     slides.push({
       slide: slide,

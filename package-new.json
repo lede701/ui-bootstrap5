@@ -1,7 +1,6 @@
 {
   "author": "https://github.com/lede701/ui-bootstrap5/graphs/contributors",
   "name": "ui-bootstrap5",
-  "version": "1.0.1",
   "description": "Native AngularJS (Angular) directives for Bootstrap",
   "homepage": "http://lede701.github.io/ui-bootstrap5/",
   "keywords": [

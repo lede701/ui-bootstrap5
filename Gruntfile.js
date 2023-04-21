@@ -9,12 +9,12 @@ module.exports = function(grunt) {
     grunt.util.linefeed = '\n';
 
     grunt.initConfig({
-        ngversion: '1.6.1',
-        bsversion: '4.1.1',
+        ngversion: '1.8.2',
+        bsversion: '5.2.3',
         modules: [],//to be filled in by build task
         pkg: grunt.file.readJSON('package.json'),
         dist: 'dist',
-        filename: 'ui-bootstrap',
+        filename: 'ui-bootstrap5',
         filenamecustom: '<%= filename %>-custom',
         meta: {
             modules: 'angular.module("ui.bootstrap", [<%= srcModules %>]);',
@@ -500,12 +500,12 @@ module.exports = function(grunt) {
             version = center;
             if(type)
             {
-                version = require('semver').inc(version, type);
+                //version = require('semver').inc(version, type);
             }
             //semver.inc strips our suffix if it existed
             if(suffix)
             {
-                version += '-' + suffix;
+                //version += '-' + suffix;
             }
             return left + version + '"';
         });
@@ -539,7 +539,7 @@ module.exports = function(grunt) {
     grunt.registerTask('release', function(version) {
         // Step 1, we change package.json
         grunt.config.set('pkg.version', version);
-        grunt.file.write('./package.json', JSON.stringify(grunt.config('pkg'), null, 2));
+        grunt.file.write('./package-new.json', JSON.stringify(grunt.config('pkg'), null, 2));
 
         // Step 2, we queue up additional tasks
         grunt.task.run([

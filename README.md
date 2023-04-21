@@ -1,33 +1,18 @@
 # UI Bootstrap 4
 
-_[AngularJS](http://angularjs.org/) directives specific to [Bootstrap](http://getbootstrap.com)_
-
-[![Join the chat at https://gitter.im/ui-bootstrap4/Lobby](https://badges.gitter.im/ui-bootstrap4/Lobby.svg)](https://gitter.im/ui-bootstrap4/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://secure.travis-ci.org/morgul/ui-bootstrap4.svg)](http://travis-ci.org/morgul/ui-bootstrap4)
-[![devDependency Status](https://david-dm.org/morgul/ui-bootstrap4/dev-status.svg?branch=master)](https://david-dm.org/morgul/ui-bootstrap4#info=devDependencies)
-
 ## Fork
 
-This is a fork of the original [ui-bootstrap4][] project. It has been modified to work with Bootstrap 4. The reason this repository exists is because some applications are choosing (or are forced to chose) to stap with Angular 1, but would like to move to Bootstrap 4. (Especially considering the fact that [bootstrap 3 is EoL](https://github.com/twbs/bootstrap/issues/20631).)
-
-This for makes as few changes as possible to the original source code, so that upstream changes can be merged in with minimal issues. Some work has been used from other attempts to do the same thing, such as the fork from [dietergeerts][].
-
-[dietergeerts]: https://github.com/dietergeerts/bootstrap
-[ui-bootstrap4]: https://github.com/morgul/ui-bootstrap4
+This is a fork of the original [ui-bootstrap4][] project. It has been modified to work with Bootstrap 5. The reason this repository exists is because some applications are choosing (or are forced to chose) to stay with Angular 1, but would like to move to Bootstrap 5.
 
 ## 🚨 Help Wanted 🚨
 
-_As of this Aug. 2019, my company no longer has any maintained Angular 1.x code, so I have lost the last of my incentive to work on this. Still happy to click buttons and make releases, but I'm pretty much done writing any code for this._
-
-I did this for a work project, and, frankly, we've gotten what we needed out of it. I'd love to see this cleaned up and maybe even maintained... but I just don't have the time myself. I'll accept merge requests, and fight with the build system... but that's basically it. If someone would like to step in, just let me know and I'll add you to the project. Just open an issue, and I'll respond.
+Help is always appreciated since this is a small step to keep our AngularJS project alive for a few more years while development on a new stack is
+performed.  Once out new stack is ready to go live the need for this library will be deprecated and we will be looking for those individuals that would like to
+see this stay alive.
 
 ### 💵 Incentivising 💵
 
 If you really want your issue fixed and you feel you can't fix it on your own, or your don't want to, I've setup IssueHunt for this project:
-
-* https://issuehunt.io/r/Morgul/ui-bootstrap4
-
-Make an item, and then add some funding, and either myself or someone in the community will likely pick it up. No promises, but it seems worth the experiment.
 
 ### Contributing
 
@@ -63,47 +48,41 @@ If you can think of more, feel free to make issues.
 
 ## Demo
 
-Do you want to see directives in action? Visit https://morgul.github.io/ui-bootstrap4/!
+Do you want to see directives in action? Visit https://lede701.github.io/ui-bootstrap5/!
 
 ## Installation
 
 Installation is easy as UI Bootstrap has minimal dependencies - only the AngularJS and Twitter Bootstrap's CSS are required.
 *Notes:*
-* Since version 0.13.0, UI Bootstrap depends on [ngAnimate](https://docs.angularjs.org/api/ngAnimate) for transitions and animations, such as the accordion, carousel, etc. Include `ngAnimate` in the module dependencies for your app in order to enable animation.
-* UI Bootstrap depends on [ngTouch](https://docs.angularjs.org/api/ngTouch) for swipe actions. Include `ngTouch` in the module dependencies for your app in order to enable swiping.
 
 ### Angular Requirements
-* UI Bootstrap 1.0 and higher _requires_ Angular 1.4.x or higher and it has been tested with Angular 1.4.8.
-* UI Bootstrap 0.14.3 is the _last_ version that supports Angular 1.3.x.
-* UI Bootstrap 0.12.0 is the _last_ version that supports Angular 1.2.x.
+* UI Bootstrap 1.0 and higher _requires_ Angular 1.8.2 which is the last update for the 1.x project.
 
 ### Bootstrap Requirements
-* UI Bootstrap 3.0 and higher requires Bootstrap CSS version 4.x or higher and it has been tested with Bootstrap CSS 4.0.0-beta.
-* UI Bootstrap 2.x requires Bootstrap CSS version 3.x or higher and it has been tested with Bootstrap CSS 3.3.6.
-* UI Bootstrap 0.8 is the _last_ version that supports Bootstrap CSS 2.3.x.
+* UI Bootstrap 1.0 and higher requires Bootstrap CSS version 5.3.0 or higher.
 
 #### Install with NPM
 
 ```sh
-$ npm install ui-bootstrap4
+$ npm install ui-bootstrap5
 ```
 
 #### Install with Yarn
 
 ```sh
-$ yarn add ui-bootstrap4
+$ yarn add ui-bootstrap5
 ```
 
 This will install AngularJS and Bootstrap NPM packages.
 
 #### Custom build
 
-Head over to https://morgul.github.io/ui-bootstrap4/ and hit the *Custom build* button to create your own custom UI Bootstrap build, just the way you like it.
+Head over to https://lede701.github.io/ui-bootstrap5/ and hit the *Custom build* button to create your own custom UI Bootstrap build, just the way you like it.
 
 #### Manual download
 
 After downloading dependencies (or better yet, referencing them from your favorite CDN) you need to download build version of this project. All the files and their purposes are described here:
-https://github.com/morgul/ui-bootstrap4/tree/gh-pages#build-files
+https://github.com/lede701/ui-bootstrap5/tree/gh-pages#build-files
 Don't worry, if you are not sure which file to take, opt for `ui-bootstrap-tpls-[version].min.js`.
 
 ### Adding dependency to your project
@@ -120,7 +99,7 @@ To use this project with webpack, follow the [NPM](#install-with-npm) instructio
 Now, if you want to use only the accordion, you can do:
 
 ```js
-import accordion from 'ui-bootstrap4/src/accordion';
+import accordion from 'ui-bootstrap5/src/accordion';
 
 angular.module('myModule', [accordion]);
 ```
@@ -128,8 +107,8 @@ angular.module('myModule', [accordion]);
 You can import all the pieces you need in the same way:
 
 ```js
-import accordion from 'ui-bootstrap4/src/accordion';
-import datepicker from 'ui-bootstrap4/src/datepicker';
+import accordion from 'ui-bootstrap5/src/accordion';
+import datepicker from 'ui-bootstrap5/src/datepicker';
 
 angular.module('myModule', [accordion, datepicker]);
 ```
@@ -153,8 +132,8 @@ If you would prefer not to load your css through your JavaScript file loader/bun
 The other modules, such as `accordion` in the example below, do not have CSS resources to load, so you should continue to import them as normal:
 
 ```js
-import accordion from 'ui-bootstrap4/src/accordion';
-import typeahead from 'ui-bootstrap4/src/typeahead/index-nocss.js';
+import accordion from 'ui-bootstrap5/src/accordion';
+import typeahead from 'ui-bootstrap5/src/typeahead/index-nocss.js';
 
 angular.module('myModule', [accordion, typeahead]);
 ```
@@ -167,7 +146,7 @@ Pre-2.0.0 does not follow a particular versioning system. 2.0.0 and onwards foll
 
 ### FAQ
 
-https://github.com/morgul/ui-bootstrap4/wiki/FAQ
+https://github.com/lede701/ui-bootstrap5/wiki/FAQ
 
 ## Code of Conduct
 
@@ -188,12 +167,12 @@ Modern mobile browsers should work without problems.
 Need help using UI Bootstrap?
 
 * ~~Live help in the IRC (`#angularjs` channel at the `freenode` network). Use this [webchat](https://webchat.freenode.net/) or your own IRC client.~~
-* ~~Ask a question in [StackOverflow](http://stackoverflow.com/) under the [ui-bootstrap4](http://stackoverflow.com/questions/tagged/ui-bootstrap4) tag.~~
+* ~~Ask a question in [StackOverflow](http://stackoverflow.com/) under the [ui-bootstrap5](http://stackoverflow.com/questions/tagged/ui-bootstrap5) tag.~~
 
-**For now, please create new issues in this repository to ask questions about using UI Bootstrap 4**
+**For now, please create new issues in this repository to ask questions about using UI Bootstrap 5**
 
 ## Found a bug?
-Please take a look at [CONTRIBUTING.md](CONTRIBUTING.md#you-think-youve-found-a-bug) and submit your issue [here](https://github.com/morgul/ui-bootstrap4/issues/new).
+Please take a look at [CONTRIBUTING.md](CONTRIBUTING.md#you-think-youve-found-a-bug) and submit your issue [here](https://github.com/lede701/ui-bootstrap5/issues/new).
 
 
 ----
@@ -205,7 +184,7 @@ We are always looking for the quality contributions! Please check the [CONTRIBUT
 
 ~~## Development, meeting minutes, roadmap and more.~~
 
-~~Head over to the [Wiki](https://github.com/morgul/ui-bootstrap4/wiki) for notes on development for UI Bootstrap, meeting minutes from the UI Bootstrap team, roadmap plans, project philosophy and more.~~
+~~Head over to the [Wiki](https://github.com/lede701/ui-bootstrap5/wiki) for notes on development for UI Bootstrap, meeting minutes from the UI Bootstrap team, roadmap plans, project philosophy and more.~~
 
 ----
 
