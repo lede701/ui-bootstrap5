@@ -1,8 +1,8 @@
 /*
- * ui-bootstrap4
- * http://morgul.github.io/ui-bootstrap4/
+ * ui-bootstrap5
+ * http://lede701.github.io/ui-bootstrap5/
 
- * Version: 3.0.4 - 2018-10-03
+ * Version: 1.0.1 - 2023-04-18
  * License: MIT
  */angular.module("ui.bootstrap", ["ui.bootstrap.collapse","ui.bootstrap.tabindex","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.common","ui.bootstrap.dateparser","ui.bootstrap.isClass","ui.bootstrap.datepicker","ui.bootstrap.position","ui.bootstrap.datepickerPopup","ui.bootstrap.debounce","ui.bootstrap.multiMap","ui.bootstrap.dropdown","ui.bootstrap.stackedMap","ui.bootstrap.modal","ui.bootstrap.paging","ui.bootstrap.pager","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
 angular.module('ui.bootstrap.collapse', [])
@@ -3510,8 +3510,8 @@ angular.module('ui.bootstrap.dropdown', ['ui.bootstrap.multiMap', 'ui.bootstrap.
 
   scope.focusDropdownEntry = function(keyCode) {
     var elems = self.dropdownMenu ? //If append to body is used.
-      angular.element(self.dropdownMenu).find('.dropdown-item') :
-      $element.find('div').eq(0).find('a.');
+      angular.element(self.dropdownMenu[0].querySelectorAll('.dropdown-item')) :
+      angular.element($element[0].querySelectorAll('div .dropdown-item'));
 
     switch (keyCode) {
       case 40: {
@@ -3881,8 +3881,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
 /**
  * A helper directive for the $modal service. It creates a backdrop element.
  */
-  .directive('uibModalBackdrop', ['$animate', '$injector', '$uibModalStack',
-  function($animate, $injector, $modalStack) {
+  .directive('uibModalBackdrop', ['$uibModalStack', '$q', '$animate',
+  function($modalStack, $q, $animate) {
     return {
       restrict: 'A',
       compile: function(tElement, tAttrs) {
@@ -3892,9 +3892,21 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
     };
 
     function linkFn(scope, element, attrs) {
-      if (attrs.modalInClass) {
-        $animate.addClass(element, attrs.modalInClass);
 
+      // Deferred object that will be resolved when this modal is rendered.
+      var modalRenderDeferObj = $q.defer();
+      // Resolve render promise post-digest
+      scope.$$postDigest(function() {
+        modalRenderDeferObj.resolve();
+      });
+
+      modalRenderDeferObj.promise.then(function() {
+        if (attrs.modalInClass) {
+          $animate.addClass(element, attrs.modalInClass);
+        }
+      });
+
+      if (attrs.modalInClass) {
         scope.$on($modalStack.NOW_CLOSING_EVENT, function(e, setIsAsync) {
           var done = setIsAsync();
           if (scope.modalOptions.animation) {
@@ -3904,6 +3916,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           }
         });
       }
+
+
     }
   }])
 
@@ -3921,6 +3935,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
       link: function(scope, element, attrs) {
         element.addClass(attrs.windowTopClass || '');
         scope.size = attrs.size;
+        scope.scrollable = attrs.scrollable === 'true';
 
         scope.close = function(evt) {
           var modal = $modalStack.getTop();
@@ -4244,7 +4259,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           openedClass: modal.openedClass,
           windowTopClass: modal.windowTopClass,
           animation: modal.animation,
-          appendTo: modal.appendTo
+          appendTo: modal.appendTo,
+          scrollable: modal.scrollable
         });
 
         openedClasses.put(modalBodyClass, modalInstance);
@@ -4270,13 +4286,11 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           if (modal.animation) {
             backdropDomEl.attr('modal-animation', 'true');
           }
-          $compile(backdropDomEl)(backdropScope);
-          $animate.enter(backdropDomEl, appendToElement);
-          if ($uibPosition.isScrollable(appendToElement)) {
-            scrollbarPadding = $uibPosition.scrollbarPadding(appendToElement);
-            if (scrollbarPadding.heightOverflow && scrollbarPadding.scrollbarWidth) {
-              appendToElement.css({paddingRight: scrollbarPadding.right + 'px'});
-            }
+
+          $animate.enter($compile(backdropDomEl)(backdropScope), appendToElement);
+          scrollbarPadding = $uibPosition.scrollbarPadding(appendToElement);
+          if (scrollbarPadding.heightOverflow && scrollbarPadding.scrollbarWidth) {
+            appendToElement.css({paddingRight: scrollbarPadding.right + 'px'});
           }
         }
 
@@ -4305,6 +4319,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           'aria-labelledby': modal.ariaLabelledBy,
           'aria-describedby': modal.ariaDescribedBy,
           'size': modal.size,
+          'scrollable': modal.scrollable,
           'index': topModalIndex,
           'animate': 'animate',
           'ng-style': '{\'z-index\': 1050 + $$topModalIndex*10, display: \'block\'}',
@@ -4486,7 +4501,8 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
       options: {
         animation: true,
         backdrop: true, //can also be false or 'static'
-        keyboard: true
+        keyboard: true,
+        scrollable: false
       },
       $get: ['$rootScope', '$q', '$document', '$templateRequest', '$controller', '$uibResolve', '$uibModalStack',
         function ($rootScope, $q, $document, $templateRequest, $controller, $uibResolve, $modalStack) {
@@ -4584,6 +4600,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
                   ariaLabelledBy: modalOptions.ariaLabelledBy,
                   ariaDescribedBy: modalOptions.ariaDescribedBy,
                   size: modalOptions.size,
+                  scrollable: modalOptions.scrollable,
                   openedClass: modalOptions.openedClass,
                   appendTo: modalOptions.appendTo
                 };
@@ -5116,7 +5133,8 @@ angular.module('ui.bootstrap.tooltip', ['ui.bootstrap.position', 'ui.bootstrap.s
               if (!positionTimeout) {
                 positionTimeout = $timeout(function() {
                   var placementClasses = $position.parsePlacement(ttScope.placement);
-                  var placement = placementClasses[1] === 'center' ? placementClasses[0] : placementClasses[0] + '-' + placementClasses[1];
+                  var ttPosition = $position.positionElements(element, tooltip, ttScope.placement, appendToBody, true);
+                  var placement = ttPosition.placement;
 				  
                   // need to add classes prior to placement to allow correct tooltip width calculations
                   if (!tooltip.hasClass(placementClasses[0])) {
@@ -5130,7 +5148,6 @@ angular.module('ui.bootstrap.tooltip', ['ui.bootstrap.position', 'ui.bootstrap.s
                   }
                   
                   // Take into account tooltup margins, since boostrap css draws tooltip arrow inside margins
-                  var ttPosition = $position.positionElements(element, tooltip, ttScope.placement, appendToBody, true);
                   var initialHeight = angular.isDefined(tooltip.offsetHeight) ? tooltip.offsetHeight : tooltip.prop('offsetHeight');
                   var elementPos = appendToBody ? $position.offset(element) : $position.position(element);
                   tooltip.css({ top: ttPosition.top + 'px', left: ttPosition.left + 'px' });
