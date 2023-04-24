@@ -1,3 +1,10 @@
-<div class="arrow"></div>
-<h3 class="popover-header" ng-bind="uibTitle" ng-if="uibTitle"></h3>
-<div class="popover-body" ng-bind="content"></div>
+<button type="button"
+	class="{{uibClass}}"
+	data-bs-container="body"
+	data-bs-toggle="popover"
+	data-bs-placement="{{uibPlacement}}"
+	data-bs-title="{{uibTitle}}"
+	data-bs-content="{{uibContent}}"
+	data-bs-trigger="{{uibTrigger}}"
+	ng-transclude>
+</button>

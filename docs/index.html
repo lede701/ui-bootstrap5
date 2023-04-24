@@ -3612,6 +3612,8 @@ Total number of items in all pages.</p>
     </div>
     <button uib-popover="{{dynamicPopover.content}}" popover-title="{{dynamicPopover.title}}" type="button" class="btn btn-secondary">Dynamic Popover</button>
 
+	<uib-popover-popup uib-content="{{dynamicPopover.content}}" uib-title="{{dynamicPopover.title}}" type="button" uib-class="btn btn-secondary">Dynamic Popover</uib-popover-popup>
+
     <button uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" type="button" class="btn btn-secondary">Popover With Template</button>
 
     <script type="text/ng-template" id="myPopoverTemplate.html">
@@ -3623,23 +3625,23 @@ Total number of items in all pages.</p>
     </script>
     <hr />
     <h4>Positional</h4>
-    <div class="form-group">
-      <label>Popover placement</label>
-      <select class="form-control" ng-model="placement.selected" ng-options="o as o for o in placement.options"></select>
-    </div>
-    <button popover-placement="{{placement.selected}}" uib-popover="On the {{placement.selected}}" type="button" class="btn btn-secondary">Popover {{placement.selected}}</button>
+
+	<uib-popover-popup uib-content="Have fun!" uib-title="Placement set to top" uib-class="btn btn-secondary" uib-placement="top">Popover top</uib-popover-popup>
+	<uib-popover-popup uib-content="Have fun!" uib-title="Placement set to bottom" uib-class="btn btn-secondary" uib-placement="bottom">Popover bottom</uib-popover-popup>
+	<uib-popover-popup uib-content="Have fun!" uib-title="Placement set to left" uib-class="btn btn-secondary" uib-placement="left">Popover left</uib-popover-popup>
+	<uib-popover-popup uib-content="Have fun!" uib-title="Placement set to right" uib-class="btn btn-secondary" uib-placement="right">Popover right</uib-popover-popup>
 
     <hr />
     <h4>Triggers</h4>
     <p>
-      <button uib-popover="I appeared on mouse enter!" popover-trigger="'mouseenter'" type="button" class="btn btn-secondary">Mouseenter</button>
+		<uib-popover-popup uib-content="I appeared on mouse enter!" uib-title="Mouse hover" uib-trigger="hover" uib-class="btn btn-secondary" uib-placement="top">Mouseenter</uib-popover-popup>
     </p>
     <input type="text" value="Click me!" uib-popover="I appeared on focus! Click away and I'll vanish..."  popover-trigger="'focus'" class="form-control">
 
     <hr />
     <h4>Other</h4>
     <button popover-animation="true" uib-popover="I fade in and out!" type="button" class="btn btn-secondary">fading</button>
-    <button uib-popover="I have a title!" popover-title="The title." type="button" class="btn btn-secondary">title</button>
+	<uib-popover-popup uib-title="The title." uib-content="Popup with title." uib-class="btn btn-secondary">I have a title!</uib-popover-popup>
     <button uib-popover="I am activated manually" popover-is-open="popoverIsOpen" ng-click="popoverIsOpen = !popoverIsOpen" type="button" class="btn btn-secondary">Toggle popover</button>
     <button uib-popover-html="htmlPopover" class="btn btn-secondary">HTML Popover</button>
     <button uib-popover-html="'<b>HTML</b>, <i>inline</i>'" class="btn btn-secondary">HTML Popover (inline)</button>
@@ -3698,17 +3700,9 @@ Whether to show the popover.</p>
 Passing in &#39;auto&#39; separated by a space before the placement will enable auto positioning, e.g: &quot;auto bottom-left&quot;. The popover will attempt to position where it fits in the closest scrollable ancestor. Accepts:</p>
 <ul>
 <li><code>top</code> - popover on top, horizontally centered on host element.</li>
-<li><code>top-left</code> - popover on top, left edge aligned with host element left edge.</li>
-<li><code>top-right</code> - popover on top, right edge aligned with host element right edge.</li>
 <li><code>bottom</code> - popover on bottom, horizontally centered on host element.</li>
-<li><code>bottom-left</code> - popover on bottom, left edge aligned with host element left edge.</li>
-<li><code>bottom-right</code> - popover on bottom, right edge aligned with host element right edge.</li>
 <li><code>left</code> - popover on left, vertically centered on host element.</li>
-<li><code>left-top</code> - popover on left, top edge aligned with host element top edge.</li>
-<li><code>left-bottom</code> - popover on left, bottom edge aligned with host element bottom edge.</li>
 <li><code>right</code> - popover on right, vertically centered on host element.</li>
-<li><code>right-top</code> - popover on right, top edge aligned with host element top edge.</li>
-<li><code>right-bottom</code> - popover on right, bottom edge aligned with host element bottom edge.</li>
 </ul>
 </li>
 <li><p><code>popover-popup-close-delay</code>
@@ -3839,24 +3833,12 @@ Provide a set of defaults for certain tooltip and popover attributes. Currently 
     title: &#x27;Title&#x27;
   };
 
-  $scope.placement = {
-    options: [
-      &#x27;top&#x27;,
-      &#x27;top-left&#x27;,
-      &#x27;top-right&#x27;,
-      &#x27;bottom&#x27;,
-      &#x27;bottom-left&#x27;,
-      &#x27;bottom-right&#x27;,
-      &#x27;left&#x27;,
-      &#x27;left-top&#x27;,
-      &#x27;left-bottom&#x27;,
-      &#x27;right&#x27;,
-      &#x27;right-top&#x27;,
-      &#x27;right-bottom&#x27;
-    ],
-    selected: &#x27;top&#x27;
-  };
-  
+  // Required for the bootstrap 5 popper utilities to run.
+  $timeout(function() {
+	const popoverTriggerList = document.querySelectorAll(&#39;[data-bs-toggle=&quot;popover&quot;]&#39;)
+	const popoverList = [...popoverTriggerList].map(popoverTriggerEl =&gt; new bootstrap.Popover(popoverTriggerEl))
+}, 100);
+
   $scope.htmlPopover = $sce.trustAsHtml(&#x27;&lt;b style=&quot;color: red&quot;&gt;I can&lt;/b&gt; have &lt;div class=&quot;label label-success&quot;&gt;HTML&lt;/div&gt; content&#x27;);
 });
 </code></pre>
@@ -3866,33 +3848,23 @@ Provide a set of defaults for certain tooltip and popover attributes. Currently 
                             </div>
                         </div>
                     </section>
-                    <script>angular.module('ui.bootstrap.demo').controller('PopoverDemoCtrl', function ($scope, $sce) {
+                    <script>
+  angular.module('ui.bootstrap.demo').controller('PopoverDemoCtrl', function ($scope, $timeout, $sce) {
   $scope.dynamicPopover = {
     content: 'Hello, World!',
     templateUrl: 'myPopoverTemplate.html',
     title: 'Title'
   };
 
-  $scope.placement = {
-    options: [
-      'top',
-      'top-left',
-      'top-right',
-      'bottom',
-      'bottom-left',
-      'bottom-right',
-      'left',
-      'left-top',
-      'left-bottom',
-      'right',
-      'right-top',
-      'right-bottom'
-    ],
-    selected: 'top'
-  };
-  
-  $scope.htmlPopover = $sce.trustAsHtml('<b style="color: red">I can</b> have <div class="label label-success">HTML</div> content');
+  $timeout(function() {
+		const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+		const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+	}, 100);
+
+	$scope.htmlPopover = $sce.trustAsHtml('<b style="color: red">I can</b> have <div class="label label-success">HTML</div> content');
 });
+
+
 </script>
                 
                     <section id="position">

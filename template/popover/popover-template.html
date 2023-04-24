@@ -1,6 +1,12 @@
-<div class="arrow"></div>
-
-<h3 class="popover-header" ng-bind="uibTitle" ng-if="uibTitle"></h3>
-<div class="popover-body"
-  uib-tooltip-template-transclude="contentExp()"
-  tooltip-template-transclude-scope="originScope()"></div>
+<button type="button"
+	class="popover-body {{uibClass}}"
+	uib-tooltip-template-transclude="contentExp()"
+	tooltip-template-transclude-scope="originScope()"
+	data-bs-container="body"
+	data-bs-toggle="popover"
+	data-bs-placement="right"
+	data-bs-title="{{uibTitle}}"
+	data-bs-content="{{uibContent}}"
+	data-bs-trigger="{{uibTrigger}}"
+	ng-transclude>
+</button>

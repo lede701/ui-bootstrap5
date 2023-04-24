@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="ui.bootstrap.demo" id="top">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="assets/favicon.ico" />
+    <title>Angular directives for Bootstrap 5</title>
+    <meta name="description" content="AngularJS (Angular) native directives for Bootstrap 5. Small footprint (5kB gzipped!), no 3rd party JS dependencies (jQuery, bootstrap JS) required! Widgets: Accordion, Alert, Buttons, Carousel, Collapse, Dateparser, Datepicker, Datepicker Popup, Dropdown, Modal, Pager, Pagination, Popover, Position, Progressbar, Rating, Tabs, Timepicker, Tooltip, Typeahead, ">
+    <meta name="google-site-verification" content="7lc5HyceLDqpV_6oNHteYFfxDJH7-S3DwnJKtNUKcRg" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.7/fastclick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.0.0/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+    <script src="..\dist\ui-bootstrap5-tpls-1.0.1.min.js"></script>
+    <script src="assets/plunker.js"></script>
+    <script src="assets/app.js"></script>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="assets/rainbow.css"/>
+    <link rel="stylesheet" href="assets/demo.css"/>
+    <link rel="author" href="https://github.com/angular-ui/bootstrap/graphs/contributors">
+</head>
+<body class="ng-cloak" ng-controller="MainCtrl">
+
+	<div class="container" ng-controller="PopoverDemoCtrl">
+		<div class="row">
+			<div class="col-12">
+				<img src="#" height="100" width="1" alt="" aria-hidden="true" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-4 offset-2">
+				<uib-popover-popup
+					uib-content="{{dynamicPopover.content}}"
+					uib-title="{{dynamicPopover.title}}"
+					uib-class="btn btn-primary">
+					<i class="bi bi-award-fill me-2"></i>{{dynamicPopover.text}}
+				</uib-popover-popup>
+			</div>
+			<div class="col-4">
+				<h4>Dynamic</h4>
+				<div class="form-group">
+				  <label>Popup Text:</label>
+				  <input type="text" ng-model="dynamicPopover.content" class="form-control">
+				</div>
+				<div class="form-group">
+				  <label>Popup Title:</label>
+				  <input type="text" ng-model="dynamicPopover.title" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Button Text:</label>
+					<input type="text" ng-model="dynamicPopover.text" class="form-control">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		angular.module('ui.bootstrap.popover').controller('PopoverDemoCtrl', function ($scope, $timeout, $sce) {
+			$scope.dynamicPopover = {
+				content: 'Hello, World!',
+				title: 'Title',
+				text: 'Awards'
+			};
+
+			$scope.placement = {
+				options: [
+				'top',
+				'top-left',
+				'top-right',
+				'bottom',
+				'bottom-left',
+				'bottom-right',
+				'left',
+				'left-top',
+				'left-bottom',
+				'right',
+				'right-top',
+				'right-bottom'
+				],
+				selected: 'top'
+			};
+
+			$timeout(() => {
+				const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+				const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+			}, 100);
+		});
+	</script>
+
+</body>
+</html>

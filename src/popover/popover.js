@@ -8,8 +8,13 @@ angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
 .directive('uibPopoverTemplatePopup', function() {
   return {
     restrict: 'A',
-    scope: { uibTitle: '@', contentExp: '&', originScope: '&' },
-    templateUrl: 'uib/template/popover/popover-template.html'
+    scope: { uibTitle: '@', uibContent: '@', uibClass: '@', uibTrigger: '=?', contentExp: '&', originScope: '&' },
+    templateUrl: 'uib/template/popover/popover-template.html',
+    link: {
+        pre: function(scope, element, attrs, ctrl){
+            scope.uibTrigger = angular.isDefined(scope.uibTrigger) ? scope.uibTrigger : 'focus';
+        }
+    }
   };
 })
 
@@ -36,11 +41,16 @@ angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
 }])
 
 .directive('uibPopoverPopup', function() {
-  return {
-    restrict: 'A',
-    scope: { uibTitle: '@', content: '@' },
-    templateUrl: 'uib/template/popover/popover.html'
-  };
+    return {
+        restrict: 'AE',
+        transclude: true,
+        scope: { uibTitle: '@', uibContent: '@', uibClass: '@', uibTrigger: '@?', uibPlacement: '@?' },
+        templateUrl: 'uib/template/popover/popover.html',
+        link: function(scope, element, attrs, ctrl){
+            scope.uibTrigger = angular.isDefined(scope.uibTrigger) ? scope.uibTrigger : 'focus';
+            scope.uibPlacement = angular.isDefined(scope.uibPlacement) ? scope.uibPlacement : 'top';
+        }
+    };
 })
 
 .directive('uibPopover', ['$uibTooltip', function($uibTooltip) {
