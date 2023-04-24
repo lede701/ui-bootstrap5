@@ -5,7 +5,7 @@
  * Version: 1.0.1 - 2023-04-24
  * License: MIT
  */angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.collapse","ui.bootstrap.tabindex","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.common","ui.bootstrap.dateparser","ui.bootstrap.isClass","ui.bootstrap.datepicker","ui.bootstrap.position","ui.bootstrap.datepickerPopup","ui.bootstrap.debounce","ui.bootstrap.multiMap","ui.bootstrap.dropdown","ui.bootstrap.stackedMap","ui.bootstrap.modal","ui.bootstrap.paging","ui.bootstrap.pager","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
-angular.module("ui.bootstrap.tpls", ["uib/template/accordion/accordion-group.html","uib/template/accordion/accordion.html","uib/template/alert/alert.html","uib/template/carousel/carousel.html","uib/template/carousel/slide.html","uib/template/datepicker/datepicker.html","uib/template/datepicker/day.html","uib/template/datepicker/month.html","uib/template/datepicker/year.html","uib/template/datepickerPopup/popup.html","uib/template/modal/window.html","uib/template/pager/pager.html","uib/template/pagination/pagination.html","uib/template/tooltip/tooltip-html-popup.html","uib/template/tooltip/tooltip-popup.html","uib/template/tooltip/tooltip-template-popup.html","uib/template/popover/popover-html.html","uib/template/popover/popover-template.html","uib/template/popover/popover.html","uib/template/progressbar/bar.html","uib/template/progressbar/progress.html","uib/template/progressbar/progressbar.html","uib/template/rating/rating.html","uib/template/tabs/tab.html","uib/template/tabs/tabset.html","uib/template/timepicker/timepicker.html","uib/template/typeahead/typeahead-match.html","uib/template/typeahead/typeahead-popup.html"]);
+angular.module("ui.bootstrap.tpls", ["uib/template/accordion/accordion-group.html","uib/template/accordion/accordion.html","uib/template/alert/alert.html","uib/template/carousel/carousel.html","uib/template/carousel/slide.html","uib/template/datepicker/datepicker.html","uib/template/datepicker/day.html","uib/template/datepicker/month.html","uib/template/datepicker/year.html","uib/template/datepickerPopup/popup.html","uib/template/modal/window.html","uib/template/pager/pager.html","uib/template/pagination/pagination.html","uib/template/tooltip/tooltip-html-popup.html","uib/template/tooltip/tooltip-popup.html","uib/template/tooltip/tooltip-template-popup.html","uib/template/popover/popover-html.html","uib/template/popover/popover-pulse.html","uib/template/popover/popover-template.html","uib/template/popover/popover.html","uib/template/progressbar/bar.html","uib/template/progressbar/progress.html","uib/template/progressbar/progressbar.html","uib/template/rating/rating.html","uib/template/tabs/tab.html","uib/template/tabs/tabset.html","uib/template/timepicker/timepicker.html","uib/template/typeahead/typeahead-match.html","uib/template/typeahead/typeahead-popup.html"]);
 angular.module('ui.bootstrap.collapse', [])
 
   .directive('uibCollapse', ['$animate', '$q', '$parse', '$injector', function($animate, $q, $parse, $injector) {
@@ -5779,6 +5779,14 @@ angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
     };
 })
 
+.directive('uibPulsePopover', function() {
+    return {
+      restrict: 'E',
+      scope: { uibTitle: '@', uibContent: '@', uibClass: '@' },
+      templateUrl: 'uib/template/popover/popover-pulse.html'
+    };
+})
+
 .directive('uibPopover', ['$uibTooltip', function($uibTooltip) {
   return $uibTooltip('uibPopover', 'popover', 'click', {
     placementClassPrefix: 'bs-popover-'
@@ -7823,6 +7831,19 @@ angular.module("uib/template/popover/popover-html.html", []).run(["$templateCach
     "<div class=\"arrow\"></div>\n" +
     "<h3 class=\"popover-header\" ng-bind=\"uibTitle\" ng-if=\"uibTitle\"></h3>\n" +
     "<div class=\"popover-body\" ng-bind-html=\"contentExp()\"></div>\n" +
+    "");
+}]);
+
+angular.module("uib/template/popover/popover-pulse.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("uib/template/popover/popover-pulse.html",
+    "<button type=\"button\"\n" +
+    "	class=\"{{uibClass}}\"\n" +
+    "	data-bs-container=\"body\"\n" +
+    "	data-bs-toggle=\"popover\"\n" +
+    "	data-bs-placement=\"right\"\n" +
+    "	data-bs-title=\"{{uibTitle}}\"\n" +
+    "	data-bs-content=\"{{uibContent}}\"\n" +
+    "	ng-transclude></button>\n" +
     "");
 }]);
 

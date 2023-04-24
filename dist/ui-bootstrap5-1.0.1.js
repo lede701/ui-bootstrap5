@@ -2,15 +2,7 @@
  * ui-bootstrap5
  * http://lede701.github.io/ui-bootstrap5/
 
-<<<<<<< HEAD:dist/ui-bootstrap5-1.0.1.js
- * Version: 1.0.1 - 2023-04-21
-=======
-<<<<<<< Updated upstream:dist/ui-bootstrap.js
- * Version: 3.0.6 - 2018-11-17
-=======
  * Version: 1.0.1 - 2023-04-24
->>>>>>> Stashed changes:dist/ui-bootstrap5-1.0.1.js
->>>>>>> Converting_Part_2:dist/ui-bootstrap.js
  * License: MIT
  */angular.module("ui.bootstrap", ["ui.bootstrap.collapse","ui.bootstrap.tabindex","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.common","ui.bootstrap.dateparser","ui.bootstrap.isClass","ui.bootstrap.datepicker","ui.bootstrap.position","ui.bootstrap.datepickerPopup","ui.bootstrap.debounce","ui.bootstrap.multiMap","ui.bootstrap.dropdown","ui.bootstrap.stackedMap","ui.bootstrap.modal","ui.bootstrap.paging","ui.bootstrap.pager","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
 angular.module('ui.bootstrap.collapse', [])
@@ -5741,14 +5733,6 @@ angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
 .directive('uibPopoverTemplatePopup', function() {
   return {
     restrict: 'A',
-<<<<<<< HEAD:dist/ui-bootstrap5-1.0.1.js
-    scope: { uibTitle: '@', uibClass: '@', contentExp: '&', originScope: '&' },
-=======
-<<<<<<< Updated upstream:dist/ui-bootstrap.js
-    scope: { uibTitle: '@', contentExp: '&', originScope: '&' },
->>>>>>> Converting_Part_2:dist/ui-bootstrap.js
-    templateUrl: 'uib/template/popover/popover-template.html'
-=======
     scope: { uibTitle: '@', uibContent: '@', uibClass: '@', uibTrigger: '=?', contentExp: '&', originScope: '&' },
     templateUrl: 'uib/template/popover/popover-template.html',
     link: {
@@ -5756,7 +5740,6 @@ angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
             scope.uibTrigger = angular.isDefined(scope.uibTrigger) ? scope.uibTrigger : 'focus';
         }
     }
->>>>>>> Stashed changes:dist/ui-bootstrap5-1.0.1.js
   };
 })
 
@@ -5783,13 +5766,6 @@ angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
 }])
 
 .directive('uibPopoverPopup', function() {
-<<<<<<< Updated upstream:dist/ui-bootstrap.js
-  return {
-    restrict: 'A',
-    scope: { uibTitle: '@', content: '@', uibClass: '@' },
-    templateUrl: 'uib/template/popover/popover.html'
-  };
-=======
     return {
         restrict: 'AE',
         transclude: true,
@@ -5800,7 +5776,6 @@ angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip'])
             scope.uibPlacement = angular.isDefined(scope.uibPlacement) ? scope.uibPlacement : 'top';
         }
     };
->>>>>>> Stashed changes:dist/ui-bootstrap5-1.0.1.js
 })
 
 .directive('uibPulsePopover', function() {
